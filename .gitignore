@@ -25,6 +25,9 @@
 ### build ###
 /build/
 
+### 3rd/lib ###
+/BearGame/3rd/lib/
+
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
 .history
