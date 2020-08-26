@@ -35,5 +35,11 @@ set(LuaSrc
     loadlib.c
     linit.c
 )
+set(CMAKE_C_FLAGS
+    -DLUA_USE_LINUX
+)
 
 add_library(${PROJECT_NAME} STATIC ${LuaSrc})
+target_link_libraries(${PROJECT_NAME}
+    dl
+)
