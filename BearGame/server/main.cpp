@@ -1,8 +1,7 @@
 #include <iostream>
 #include "common/config/Config.h"
 #include "common/service/ServiceMgr.h"
-#include "base/Singleton.h"
-
+#include "common/log/Logging.h"
 
 using namespace BearGame;
 using namespace std;
@@ -17,8 +16,12 @@ int main() {
     cout << user << endl;
     cout << Singleton<Config>::instance().GetFps() << endl;
     ServiceMgr::instance().Init();
-    
-    while (ServiceMgr::instance().Loop()) {}
+
+    LOG_TRACE << "Output Log Test";
+
+    while (ServiceMgr::instance().Loop()) {
+        LOG_TRACE << "Output Log Test";
+    }
     
     return 0;
 }
