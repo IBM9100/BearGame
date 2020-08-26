@@ -1,4 +1,4 @@
-#include "BearGame/server/common/Config.h"
+#include "common/config/Config.h"
 
 
 using namespace BearGame;

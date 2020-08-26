@@ -8,7 +8,7 @@ extern "C" {
 }
 
 #include "LuaBridge/LuaBridge.h"
-#include "BearGame/base/Noncopyable.h"
+#include "base/Noncopyable.h"
 
 namespace BearGame {
 

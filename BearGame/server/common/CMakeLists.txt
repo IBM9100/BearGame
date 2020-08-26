@@ -1,5 +1,6 @@
 set(CommonSrc
-    config.cpp
+    config/Config.cpp
+    service/ServiceMgr.cpp
 )
 
 add_library(common ${CommonSrc})

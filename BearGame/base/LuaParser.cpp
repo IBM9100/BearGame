@@ -1,4 +1,4 @@
-#include "BearGame/base/LuaParser.h"
+#include "base/LuaParser.h"
 
 using namespace BearGame;
 

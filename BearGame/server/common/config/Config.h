@@ -1,9 +1,9 @@
-#ifndef BEARGAME_SERVER_COMMON_CONFIG_H
-#define BEARGAME_SERVER_COMMON_CONFIG_H
+#ifndef BEARGAME_SERVER_COMMON_CONFIG_CONFIG_H
+#define BEARGAME_SERVER_COMMON_CONFIG_CONFIG_H
 
 #include <memory>
 
-#include "BearGame/base/LuaParser.h"
+#include "base/LuaParser.h"
 
 namespace BearGame {
 

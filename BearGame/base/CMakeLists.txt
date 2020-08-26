@@ -1,5 +1,7 @@
 set(BaseSrc
     LuaParser.cpp
+    Clock.cpp
+    Sleep.cpp
 )
 
 
