@@ -17,12 +17,12 @@ bool Config::Init(const std::string& path) {
     bool result = false;
     
     if (!m_ptrParser->DoFile(path)) {
-        printf("Error dofile");
+        printf("Error dofile\n");
         goto Exit0;
     }
 
     if (!m_ptrParser->GetValue("fps", &m_fps)) {
-        printf("Error GetValue");
+        printf("Error GetValue\n");
 
         goto Exit0;
     }

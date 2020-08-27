@@ -12,6 +12,7 @@ public:
     bool Init();
     bool Loop();
     bool UnInit();
+    void SetExitSignal();
 private:
     uint32_t m_frameTime;
     bool m_exitFlag;

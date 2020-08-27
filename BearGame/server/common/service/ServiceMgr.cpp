@@ -1,8 +1,7 @@
 #include "common/service/ServiceMgr.h"
 #include "common/config/Config.h"
-
+#include "common/log/Logging.h"
 #include "base/Sleep.h"
-
 #include "base/Clock.h"
 
 using namespace BearGame;
@@ -18,12 +17,17 @@ bool ServiceMgr::Init() {
     return true;
 }
 
+void ServiceMgr::SetExitSignal() {
+    m_exitFlag = true;
+}
+
 bool ServiceMgr::Loop() {
     bool result = false;
     Clock::instance().Update();
     uint64_t start = Clock::instance().Tick();
 
     if (m_exitFlag) {
+        LOG_TRACE << "exiting...";
         goto Exit0;
     }
 
@@ -38,10 +42,10 @@ Exit0:
     uint32_t cost = static_cast<uint32_t>(end - start);
 
     if (cost > m_frameTime) {
-        printf("超出时间了\n");
+        LOG_TRACE << "超出时间了";
     } else {
         uint32_t sleepTime = m_frameTime - cost;
-        printf("sleepTime: %d\n", sleepTime);
+        LOG_TRACE << "sleepTime: " << sleepTime;
         MsSleep(sleepTime);
     }
     

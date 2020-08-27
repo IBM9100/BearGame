@@ -3,23 +3,28 @@
 
 #include <string>
 #include <cstring>
+#include <algorithm>
 
 #include "base/Noncopyable.h"
 
 namespace BearGame {
 
+const int kSmallBuffer = 4000;
+
 template <int SIZE>
-class Buffer : private Noncopyable {
+class LogBuffer : private Noncopyable {
 public:
-    Buffer() : m_ptrCur(m_data) { }
-    ~Buffer() { }
+    LogBuffer() : m_ptrCur(m_data) { }
+    ~LogBuffer() { }
 public:
     void Append(const char* buf, size_t len) {
         memcpy(m_ptrCur, buf, len);
         m_ptrCur += len;
     }
-    const char* data() const { return m_data; }
-    int length() const { return static_cast<int>(m_ptrCur - m_data); }
+    const char* GetData() const { return m_data; }
+    int GetDataSize() const { return static_cast<int>(m_ptrCur - m_data); }
+    char* GetCurPtr() { return m_ptrCur; }
+    void Write(size_t len) { m_ptrCur += len; }
 private:
     char m_data[SIZE];
     char* m_ptrCur;
@@ -28,15 +33,17 @@ private:
 
 class LogStream : private Noncopyable {
 public:
-    LogStream& operator<<(const std::string& str) {
-        m_buffer.Append(str.c_str(), str.size());
-        m_buffer.Append("\n", 1);
-        return *this;
-    }
-    const Buffer<4000>& buffer() const { return m_buffer; }
+    typedef LogBuffer<kSmallBuffer> Buffer;
+    LogStream& operator<<(char v);
+    LogStream& operator<<(const char* str);
+    LogStream& operator<<(const std::string& str);
 
+    LogStream& operator<<(int v);
+    LogStream& operator<<(unsigned int v);
+    LogStream& operator<<(unsigned long v);
+    Buffer& GetBuffer() { return m_buffer; }
 private:
-    Buffer<4000> m_buffer;
+    Buffer m_buffer;
 };
 
 }
