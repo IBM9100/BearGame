@@ -16,14 +16,14 @@ const char* LogLevelName[Logger::NUM_LOG_LEVELS] = {
 };
 
 void defaultOutput(const char* msg, int size) {
-    fwrite(msg, 1, size, stdout);
+    ::fwrite(msg, 1, size, stdout);
 }
 
 void defaultFlush() {
-    fflush(stdout);
+    ::fflush(stdout);
 }
 
-Logger::LogLevel g_logLevel = Logger::TRACE;
+Logger::LogLevel g_logLevel = Logger::INFO;
 Logger::OutputFunc g_logOutputFunc = defaultOutput;
 Logger::FlushFunc g_logFlushFunc = defaultFlush;
 
@@ -75,16 +75,14 @@ void Logger::Impl::FormatTime() {
     auto s = static_cast<time_t>(time / 1000000);
     struct tm tm_time;
     ::localtime_r(&s, &tm_time);
-    char time_str[32]={NULL};
-    snprintf(time_str, sizeof(time_str), "[%4d-%02d-%02d %02d:%02d:%02d] ",
+    char timeBuf[32]={NULL};
+    snprintf(timeBuf, sizeof(timeBuf), "[%4d-%02d-%02d %02d:%02d:%02d] ",
         tm_time.tm_year + 1900, tm_time.tm_mon + 1, tm_time.tm_mday,
         tm_time.tm_hour, tm_time.tm_min, tm_time.tm_sec);
-    m_stream << time_str;
+    m_stream << timeBuf;
 }
 
 
 void Logger::Impl::LineEnd() {
     m_stream << '\n';
 }
-
-

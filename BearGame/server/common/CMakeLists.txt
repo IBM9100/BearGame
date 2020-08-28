@@ -9,6 +9,7 @@ set(ServiceSrc
 set(LogSrc
     log/Logging.cpp
     log/LogStream.cpp
+    log/LogFile.cpp
 )
 
 set(CommonSrc

@@ -5,6 +5,7 @@
 #include "common/service/ServiceMgr.h"
 #include "common/log/Logging.h"
 #include "base/Clock.h"
+#include "common/log/LogFile.h"
 
 using namespace BearGame;
 using namespace std;
@@ -21,13 +22,24 @@ void RegisterSignal() {
     signal(SIGINT, ::OnQuitSignal);
 }
 
-void hhh(const char* msg, int size) {
-    printf("print by printf: %s\n", msg);
+unique_ptr<LogFile> g_logFile;
+
+void outputFunc(const char* msg, int size) {
+    fwrite(msg, 1, size, stdout);
+    g_logFile->Append(msg, size);
 }
+
+void flushFunc() {
+    fflush(stdout);
+    g_logFile->Flush();
+}
+
 int main() {
     RegisterSignal();
-    // Logger::SetLogLevel(Logger::DEBUG);
-    Logger::SetOutputFunc(hhh);
+    g_logFile.reset(new LogFile("gamesvr"));
+
+    Logger::SetLogLevel(Logger::TRACE);
+    Logger::SetOutputFunc(outputFunc);
     Singleton<Config>::instance().Init(configPath);
     string user;
     Singleton<Config>::instance().GetValue("user", &user);
