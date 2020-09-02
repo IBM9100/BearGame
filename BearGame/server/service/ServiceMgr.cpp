@@ -1,4 +1,4 @@
-#include "common/service/ServiceMgr.h"
+#include "service/ServiceMgr.h"
 #include "common/config/Config.h"
 #include "common/log/Logging.h"
 #include "base/Sleep.h"
@@ -13,6 +13,8 @@ bool ServiceMgr::Init() {
     
     // 30帧 为 33ms
     m_frameTime = 1000 / fps;
+    
+    _InitService();
 
     return true;
 }
@@ -24,31 +26,51 @@ void ServiceMgr::SetExitSignal() {
 bool ServiceMgr::Loop() {
     bool result = false;
     Clock::instance().Update();
-    uint64_t start = Clock::instance().Tick();
+    int64_t start = Clock::instance().Tick();
 
     if (m_exitFlag) {
         LOG_TRACE << "exiting...";
         goto Exit0;
     }
 
+    for (auto& service : m_runningService) {
+        service->Loop();
+    }
+
     result = true;
 Exit0:
     // MsSleep(34);
-
     Clock::instance().Update();
-    uint64_t end = Clock::instance().Tick();
+    int64_t end = Clock::instance().Tick();
     assert(end >= start);
 
-    uint32_t cost = static_cast<uint32_t>(end - start);
+    uint32_t cost = end - start;
 
     if (cost > m_frameTime) {
         LOG_TRACE << "超出时间了";
     } else {
         uint32_t sleepTime = m_frameTime - cost;
-        LOG_TRACE << "sleepTime: " << sleepTime;
+        // LOG_TRACE << "sleepTime: " << sleepTime;
         MsSleep(sleepTime);
     }
     
 
     return result;
 }
+
+bool ServiceMgr::_InitService() {
+    bool result = false;
+    // move ctor
+    std::unique_ptr<Service> service(Service::CreateService());
+    service->Init("name");
+    m_runningService.push_back(std::move(service));
+
+    result = true;
+
+Exit0:
+    return result;
+}
+
+// bool ServiceMgr::AddService(ServiceType serviceType, const std::string& serviceName) {
+
+// }

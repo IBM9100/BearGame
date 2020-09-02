@@ -2,7 +2,7 @@
 #include <csignal>
 
 #include "common/config/Config.h"
-#include "common/service/ServiceMgr.h"
+#include "service/ServiceMgr.h"
 #include "common/log/Logging.h"
 #include "base/Clock.h"
 #include "common/log/LogFile.h"
@@ -26,17 +26,17 @@ unique_ptr<LogFile> g_logFile;
 
 void outputFunc(const char* msg, int size) {
     fwrite(msg, 1, size, stdout);
-    g_logFile->Append(msg, size);
+    // g_logFile->Append(msg, size);
 }
 
 void flushFunc() {
     fflush(stdout);
-    g_logFile->Flush();
+    // g_logFile->Flush();
 }
 
 int main() {
     RegisterSignal();
-    g_logFile.reset(new LogFile("gamesvr"));
+    // g_logFile.reset(new LogFile("gamesvr"));
 
     Logger::SetLogLevel(Logger::TRACE);
     Logger::SetOutputFunc(outputFunc);

@@ -68,9 +68,17 @@ inline Logger::LogLevel Logger::GetLogLevel() {
     return g_logLevel;
 }
 
+// Fixme!!!
 #define LOG_TRACE if (Logger::GetLogLevel() <= Logger::TRACE)\
     Logger(__FILE__, __LINE__, __func__, Logger::TRACE).GetStream()
-
+#define LOG_DEBUG if (Logger::GetLogLevel() <= Logger::TRACE)\
+    Logger(__FILE__, __LINE__, __func__, Logger::DEBUG).GetStream()
+#define LOG_INFO if (Logger::GetLogLevel() <= Logger::TRACE)\
+    Logger(__FILE__, __LINE__, __func__, Logger::INFO).GetStream()
+#define LOG_WARN if (Logger::GetLogLevel() <= Logger::TRACE)\
+    Logger(__FILE__, __LINE__, __func__, Logger::WARN).GetStream()
+#define LOG_ERROR if (Logger::GetLogLevel() <= Logger::TRACE)\
+    Logger(__FILE__, __LINE__, __func__, Logger::ERROR).GetStream()
 }
 
 #endif

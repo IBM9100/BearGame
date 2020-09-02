@@ -2,9 +2,6 @@ set(ConfigSrc
     config/Config.cpp
 )
 
-set(ServiceSrc
-    service/ServiceMgr.cpp
-)
 
 set(LogSrc
     log/Logging.cpp
@@ -14,7 +11,6 @@ set(LogSrc
 
 set(CommonSrc
     ${ConfigSrc}
-    ${ServiceSrc}
     ${LogSrc}
 )
 

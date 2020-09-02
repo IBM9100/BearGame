@@ -1,13 +1,7 @@
 #ifndef BEARGAME_BASE_LUAPARSER_H
 #define BEARGAME_BASE_LUAPARSER_H
 
-extern "C" {
-    #include "lua/lua.h"
-    #include "lua/lualib.h"
-    #include "lua/lauxlib.h"
-}
-
-#include "LuaBridge/LuaBridge.h"
+#include "base/LuaHeader.h"
 #include "base/Noncopyable.h"
 
 namespace BearGame {

@@ -10,8 +10,10 @@ LuaParser::LuaParser()
 
 
 LuaParser::~LuaParser() {
-    lua_close(m_luaState);
-    m_luaState = nullptr;
+    if (m_luaState) {
+        lua_close(m_luaState);
+        m_luaState = nullptr;
+    }
 }
 
 bool LuaParser::DoString(const std::string& script) {
