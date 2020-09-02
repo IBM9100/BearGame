@@ -15,6 +15,7 @@ public:
     ~LuaScript();
 public:
     bool DoFile(const std::string& path);
+    lua_State* GetLuaState() const { return m_luaState; }
 public:
     template <typename ...PARAM>
     bool CallFunc(const std::string& funcName, PARAM... params);

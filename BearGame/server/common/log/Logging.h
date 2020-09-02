@@ -23,6 +23,13 @@ public:
                 size -= static_cast<int>(data - arr);
             }
         }
+        explicit SourceFile(const char* fileName) : data(fileName) {
+            const char* slash = strrchr(fileName, '/');
+            if (slash) {
+                data = slash + 1;
+            }
+            size = static_cast<int>(strlen(data));
+        }
     public:
         const char* data;
         int size;
