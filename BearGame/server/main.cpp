@@ -10,7 +10,7 @@
 using namespace BearGame;
 using namespace std;
 
-static const string configPath = "./config.lua";
+static const string configPath = "./Config.lua";
 
 void OnQuitSignal(int) {
     ServiceMgr::instance().SetExitSignal();

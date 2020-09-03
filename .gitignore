@@ -18,8 +18,8 @@
 
 ### bin ###
 /bin/*
-!/bin/BearNet/
-!/bin/config.lua
+!*/bin/*.lua
+!/bin/BGScript/
 
 ### lib ###
 /lib/

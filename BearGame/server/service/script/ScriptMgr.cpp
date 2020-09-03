@@ -13,7 +13,7 @@ bool ScriptMgr::Init() {
     lua_State* state = m_luaScript.GetLuaState();
     RegisterGlobalFunc(state);
 
-    if (!m_luaScript.DoFile("./BGScript/Boot.lua")) {
+    if (!m_luaScript.DoFile("./BGScript/main.lua")) {
         LOG_ERROR << "";
     }
 
