@@ -5,38 +5,15 @@
 
 #include "base/LuaHeader.h"
 
-#include "common/log/Logging.h"
 
 namespace BearGame {
 
+    int RegisterGlobalFunc(lua_State* state);
+
     namespace ScriptExport {
-        std::string GetWorkDir() {
-            std::string res;
-            char* buffer = getcwd(nullptr, 0);
-            if (buffer) {
-                res = buffer;
-            }
-            return res;
-        }
-        void LuaLog(std::string fileName, int line, std::string funcName, int level, std::string content) {
-            Logger(Logger::SourceFile(fileName.c_str()), line, funcName.c_str(), Logger::LogLevel(level)).GetStream() << content;
-        }
-
+        std::string GetWorkDir();
+        void LuaLog(std::string fileName, int line, std::string funcName, int level, std::string content);
     }
-
-
-    using namespace luabridge;
-    using namespace ScriptExport;
-
-    int RegisterGlobalFunc(lua_State* state) {
-        getGlobalNamespace(state)
-            .addFunction("CGetWorkDir", GetWorkDir)
-            .addFunction("CLog", LuaLog);
-
-        return 0;
-    }
-
-
 
 }
 

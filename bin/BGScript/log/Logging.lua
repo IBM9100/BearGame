@@ -13,22 +13,34 @@ local LogLevel = {
     FATAL = 5
 }
 
-function TableToString(tb)
-    local nSize = tb.n or 0;
-    for i = 1, nSize do
-        tb[i] = tostring(tb[i]) or ""; 
-    end
-    
-    if #tb == 0 then
-        return  "";
-     end
-     
-    return string.format("[%s] %s", "GAME", tb);
-end
-
 function LOG_TRACE(str)
     local fileName, line, funcName = getCallerInfo()
     CLog(fileName, line, funcName, LogLevel.TRACE, str)
+end
+
+function LOG_DEBUG(str)
+    local fileName, line, funcName = getCallerInfo()
+    CLog(fileName, line, funcName, LogLevel.DEBUG, str)
+end
+
+function LOG_INFO(str)
+    local fileName, line, funcName = getCallerInfo()
+    CLog(fileName, line, funcName, LogLevel.INFO, str)
+end
+
+function LOG_WARN(str)
+    local fileName, line, funcName = getCallerInfo()
+    CLog(fileName, line, funcName, LogLevel.WARN, str)
+end
+
+function LOG_ERROR(str)
+    local fileName, line, funcName = getCallerInfo()
+    CLog(fileName, line, funcName, LogLevel.ERROR, str)
+end
+
+function LOG_FATAL(str)
+    local fileName, line, funcName = getCallerInfo()
+    CLog(fileName, line, funcName, LogLevel.FATAL, str)
 end
 
 -- return fileName, line, funcName
