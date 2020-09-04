@@ -1,4 +1,6 @@
 #include "common/log/LogStream.h"
+
+#include "common/log/LogColorful.h"
 #include "base/Convert.h"
 
 using namespace BearGame;

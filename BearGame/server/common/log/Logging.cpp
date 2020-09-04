@@ -1,18 +1,19 @@
 #include "common/log/Logging.h"
 
+#include "common/log/LogColorful.h"
 #include "base/Clock.h"
 
 using namespace BearGame;
 
 namespace BearGame {
 
-const char* LogLevelName[Logger::NUM_LOG_LEVELS] = {
-    "TRACE",
-    "DEBUG",
-    "INFO",
-    "WARN",
-    "ERROR",
-    "FATAL",
+const LogLevelMeta logLevelMetas[Logger::NUM_LOG_LEVELS] = {
+    {"TRACE", Colorful::white, Colorful::transparent},
+    {"DEBUG", Colorful::magenta, Colorful::transparent},
+    {"INFO", Colorful::white, Colorful::transparent},
+    {"WARN", Colorful::yellow, Colorful::transparent},
+    {"ERROR", Colorful::red, Colorful::transparent},
+    {"FATAL", Colorful::red, Colorful::highlight},
 };
 
 void defaultOutput(const char* msg, int size) {
@@ -63,7 +64,9 @@ Logger::Impl::Impl(LogLevel level, const SourceFile& fileName, int line, const c
       m_line(line),
       m_funcName(funcName) {
     FormatTime();
-    m_stream << "[" << LogLevelName[m_level] << "]";
+    m_stream << logLevelMetas[m_level].foreColor
+             << logLevelMetas[m_level].backColor << "["
+             << logLevelMetas[m_level].levelName << "]" << Colorful::end;
     m_stream << "[" << m_fileName << "]";
     m_stream << "[" << m_line << "]";
     m_stream << "[" << m_funcName << "] ";
@@ -84,5 +87,5 @@ void Logger::Impl::FormatTime() {
 
 
 void Logger::Impl::LineEnd() {
-    m_stream << '\n';
+    m_stream << Colorful::end << '\n';
 }
