@@ -1,4 +1,5 @@
 # BearGame
+<a href="https://github.com/Yu2erer/BearGame/actions?query=workflow%3Abuild"><img src="https://github.com/Yu2erer/BearGame/workflows/build/badge.svg?branch=master"></a>
 BearGame 目标是成为一个 五脏俱全 具有教学意义的游戏服务器框架.
 
 ## Todo
