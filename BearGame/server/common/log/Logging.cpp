@@ -1,6 +1,5 @@
 #include "common/log/Logging.h"
 
-#include "common/log/LogColorful.h"
 #include "base/Clock.h"
 
 using namespace BearGame;
