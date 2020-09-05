@@ -1,9 +1,16 @@
 #ifndef BEARGAME_SERVER_COMMON_LOG_LOGGING_H
 #define BEARGAME_SERVER_COMMON_LOG_LOGGING_H
 
+#include "common/log/LogColorful.h"
 #include "common/log/LogStream.h"
 
 namespace BearGame {
+
+struct LogLevelMeta {
+  const char* levelName;
+  const Colorful foreColor;
+  const Colorful backColor;
+};
 
 class Logger {
 public:
